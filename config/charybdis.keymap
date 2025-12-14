@@ -96,7 +96,7 @@
 &kp Q              &kp W              &kp F              &kp P               &kp B                &kp J  &kp L               &kp U              &kp Y              &kp SQT
 &hrm_left LGUI A   &hrm_left LALT R   &hrm_left LCTRL S  &hrm_left LSHFT T   &kp G                &kp M  &hrm_right RSHFT N  &hrm_right RCTRL E &hrm_right RALT I  &hrm_right RGUI O
 &kp Z              &hrm_left RALT X   &kp C              &kp D               &kp V                &kp K  &kp H               &kp COMMA          &hrm_right RALT DOT &kp FSLH
-                                                         &lt MEDIA ESC       &lt NAV SPACE  &lt SYM TAB    &lt NUM RET        &lt NUM BSPC
+                                                         &lt MEDIA ESC       &lt NAV SPACE  &lt SYM TAB    &kp RET            &lt NUM BSPC
             >;
         };
 
