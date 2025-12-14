@@ -59,6 +59,17 @@
             hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 30 31 34>;
             hold-trigger-on-release;
         };
+
+        // Z key hold for KBD layer access
+        z_kbd: z_kbd {
+            compatible = "zmk,behavior-hold-tap";
+            label = "Z KBD Layer";
+            bindings = <&mo>, <&kp>;
+            #binding-cells = <2>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            flavor = "balanced";
+        };
     };
 
     combos {
@@ -95,8 +106,8 @@
             bindings = <
 &kp Q              &kp W              &kp F              &kp P               &kp B                &kp J  &kp L               &kp U              &kp Y              &kp SQT
 &hrm_left LGUI A   &hrm_left LALT R   &hrm_left LCTRL S  &hrm_left LSHFT T   &kp G                &kp M  &hrm_right RSHFT N  &hrm_right RCTRL E &hrm_right RALT I  &hrm_right RGUI O
-&kp Z              &hrm_left RALT X   &kp C              &kp D               &kp V                &kp K  &kp H               &kp COMMA          &hrm_right RALT DOT &kp FSLH
-                                                         &lt MEDIA ESC       &lt NAV SPACE  &lt SYM TAB    &kp RET            &lt NUM BSPC
+&z_kbd KBD Z       &hrm_left RALT X   &kp C              &kp D               &kp V                &kp K  &kp H               &kp COMMA          &hrm_right RALT DOT &kp FSLH
+                                                         &lt MEDIA ESC       &lt NAV SPACE  &kp TAB        &lt SYM RET        &lt NUM BSPC
             >;
         };
 
@@ -133,14 +144,14 @@
             >;
         };
 
-        // Layer 4: MEDIA + FUNCTION KEYS
+        // Layer 4: MEDIA + FUNCTION KEYS (Fkeys on right, Media on left)
         MEDIA {
             label = "MEDIA";
             bindings = <
-&kp F12    &kp F7     &kp F8     &kp F9     &kp PSCRN            &trans     &trans       &trans       &trans     &trans
-&kp F11    &kp F4     &kp F5     &kp F6     &kp SLCK             &kp C_PREV &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT &kp C_MUTE
-&kp F10    &kp F1     &kp F2     &kp F3     &kp PAUSE_BREAK      &trans     &trans       &trans       &trans     &trans
-                                 &trans     &kp C_PP    &trans              &mkp LCLK    &mkp RCLK
+&trans     &trans       &trans       &trans     &trans               &kp PSCRN       &kp F7     &kp F8     &kp F9     &kp F12
+&kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT &trans               &kp SLCK        &kp F4     &kp F5     &kp F6     &kp F11
+&trans     &kp C_PREV   &kp C_PP     &trans     &trans               &kp PAUSE_BREAK &kp F1     &kp F2     &kp F3     &kp F10
+                                     &trans     &trans      &trans                   &mkp LCLK  &mkp RCLK
             >;
         };
 

@@ -22,9 +22,9 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
 │ A/GUI │ R/ALT │ S/CTL │ T/SFT │   G   │   │   M   │ N/SFT │ E/CTL │ I/ALT │ O/GUI │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
-│   Z   │X/RALT │   C   │   D   │   V   │   │   K   │   H   │   ,   │./RALT │   /   │
+│ Z/KBD │X/RALT │   C   │   D   │   V   │   │   K   │   H   │   ,   │./RALT │   /   │
 └───────┴───────┴───────┼───────┼───────┤   ├───────┼───────┼───────┴───────┴───────┘
-                        │ESC/MED│SPC/NAV│TAB/SYM│ ENTER │BSP/NUM│ 🔴 Trackball
+                        │ESC/MED│SPC/NAV│  TAB  │ENT/SYM│BSP/NUM│ 🔴 Trackball
                         └───────┴───────┴───────┴───────┴───────┘
 ```
 
@@ -63,7 +63,7 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 ```
 
 ### Layer 3: SYM (Symbols - Shifted Numpad)
-*Activated by holding Tab*
+*Activated by holding Enter*
 ```
 ┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
 │   {   │   &   │   *   │   (   │   }   │   │       │       │       │       │       │
@@ -72,26 +72,26 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
 │   ~   │   !   │   @   │   #   │   |   │   │       │       │       │ RALT  │       │
 └───────┴───────┴───────┼───────┼───────┤   ├───────┼───────┼───────┴───────┴───────┘
-                        │   (   │   )   │ ████  │   _   │       │
+                        │   (   │   )   │  TAB  │ ████  │   _   │
                         └───────┴───────┴───────┴───────┴───────┘
 ```
 
 ### Layer 4: MEDIA + FUNCTION KEYS
-*Activated by holding Escape*
+*Activated by holding Escape (media left, F-keys right)*
 ```
 ┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
-│  F12  │  F7   │  F8   │  F9   │ PSCR  │   │       │       │       │       │       │
+│       │       │       │       │       │   │ PSCR  │  F7   │  F8   │  F9   │  F12  │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
-│  F11  │  F4   │  F5   │  F6   │ SLCK  │   │ PREV  │ VOLD  │ VOLU  │ NEXT  │ MUTE  │
+│ MUTE  │ VOLD  │ VOLU  │ NEXT  │       │   │ SLCK  │  F4   │  F5   │  F6   │  F11  │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
-│  F10  │  F1   │  F2   │  F3   │ PAUSE │   │       │       │       │       │       │
+│       │ PREV  │ PLAY  │       │       │   │ PAUSE │  F1   │  F2   │  F3   │  F10  │
 └───────┴───────┴───────┼───────┼───────┤   ├───────┼───────┼───────┴───────┴───────┘
-                        │ ████  │ PLAY  │       │ LCLK  │ RCLK  │
+                        │ ████  │       │       │ LCLK  │ RCLK  │
                         └───────┴───────┴───────┴───────┴───────┘
 ```
 
 ### Layer 5: KEYBOARD CONTROLS
-*Activated by combo: Q + P (both outer top keys)*
+*Activated by combo: Q + P (both outer top keys) OR hold Z*
 ```
 ┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
 │ BOOT  │ RESET │       │       │       │   │  BT0  │  BT1  │  BT2  │  BT3  │  BT4  │
