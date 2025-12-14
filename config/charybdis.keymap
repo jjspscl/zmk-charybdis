@@ -6,22 +6,24 @@
 
 #define BASE 0
 #define NAV 1
-#define SYM 2
-#define MEDIA 3
-#define KBD 4
+#define NUM 2
+#define SYM 3
+#define MEDIA 4
+#define KBD 5
 
-#define U_TAPPING_TERM 200
+#define U_TAPPING_TERM 280
+#define QUICK_TAP_TERM 175
 
 &mt {
     tapping-term-ms = <U_TAPPING_TERM>;
-    quick-tap-ms = <U_TAPPING_TERM>;
-    flavor = "tap-preferred";
+    quick-tap-ms = <QUICK_TAP_TERM>;
+    flavor = "balanced";
 };
 
 &lt {
     tapping-term-ms = <U_TAPPING_TERM>;
-    quick-tap-ms = <U_TAPPING_TERM>;
-    flavor = "tap-preferred";
+    quick-tap-ms = <QUICK_TAP_TERM>;
+    flavor = "balanced";
 };
 
 / {
@@ -30,26 +32,32 @@
 
 / {
     behaviors {
-        hrm_right: hrm_right {
-            compatible = "zmk,behavior-hold-tap";
-            label = "Homerow Mods Right";
-            bindings = <&kp>, <&kp>;
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            quick-tap-ms = <200>;
-            flavor = "tap-preferred";
-            hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 30 31>;
-        };
-
+        // Home row mods - balanced flavor like Miryoku
+        // Requires holding for mod, but allows rolling for typing
         hrm_left: hrm_left {
             compatible = "zmk,behavior-hold-tap";
             label = "Homerow Mods Left";
             bindings = <&kp>, <&kp>;
             #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            quick-tap-ms = <200>;
-            flavor = "tap-preferred";
-            hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 32 33>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <150>;
+            flavor = "balanced";
+            hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 32 33 34>;
+            hold-trigger-on-release;
+        };
+
+        hrm_right: hrm_right {
+            compatible = "zmk,behavior-hold-tap";
+            label = "Homerow Mods Right";
+            bindings = <&kp>, <&kp>;
+            #binding-cells = <2>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <150>;
+            flavor = "balanced";
+            hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 30 31 34>;
+            hold-trigger-on-release;
         };
     };
 
@@ -88,44 +96,55 @@
 &kp Q              &kp W              &kp F              &kp P               &kp B                &kp J  &kp L               &kp U              &kp Y              &kp SQT
 &hrm_left LGUI A   &hrm_left LALT R   &hrm_left LCTRL S  &hrm_left LSHFT T   &kp G                &kp M  &hrm_right RSHFT N  &hrm_right RCTRL E &hrm_right RALT I  &hrm_right RGUI O
 &kp Z              &hrm_left RALT X   &kp C              &kp D               &kp V                &kp K  &kp H               &kp COMMA          &hrm_right RALT DOT &kp FSLH
-                                                         &mt LSHFT ESC       &lt NAV SPACE  &lt MEDIA TAB   &mt RCTRL RET       &lt SYM BSPC
+                                                         &lt MEDIA ESC       &lt NAV SPACE  &lt SYM TAB    &lt NUM RET        &lt NUM BSPC
             >;
         };
 
-        // Layer 1: NAV + NUMBERS
+        // Layer 1: NAV (Navigation + Clipboard)
         NAV {
             label = "NAV";
             bindings = <
-&kp N1     &kp N2     &kp N3     &kp N4     &kp N5               &kp N6    &kp N7    &kp N8    &kp N9     &kp N0
-&kp LGUI   &kp LALT   &kp LCTRL  &kp LSHFT  &kp TAB              &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT  &kp SEMI
-&kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &kp LC(Y)            &kp HOME  &kp PG_DN &kp PG_UP &kp END    &kp BSLH
-                                 &kp GRAVE  &trans      &kp MINUS         &kp RET   &kp DEL
+&kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &kp LC(Y)            &kp CAPS  &kp HOME  &kp UP    &kp END    &kp PG_UP
+&kp LGUI   &kp LALT   &kp LCTRL  &kp LSHFT  &kp TAB              &kp INS   &kp LEFT  &kp DOWN  &kp RIGHT  &kp PG_DN
+&trans     &kp RALT   &trans     &trans     &trans               &trans    &kp HOME  &trans    &kp END    &trans
+                                 &trans     &trans      &trans             &kp RET   &kp DEL
             >;
         };
 
-        // Layer 2: SYMBOLS
+        // Layer 2: NUM (Numpad on left side - Miryoku style)
+        NUM {
+            label = "NUM";
+            bindings = <
+&kp LBKT   &kp N7     &kp N8     &kp N9     &kp RBKT             &trans    &trans    &trans    &trans     &trans
+&kp SEMI   &kp N4     &kp N5     &kp N6     &kp EQUAL            &trans    &kp RSHFT &kp RCTRL &kp RALT   &kp RGUI
+&kp GRAVE  &kp N1     &kp N2     &kp N3     &kp BSLH             &trans    &trans    &trans    &kp RALT   &trans
+                                 &kp DOT    &kp N0      &kp MINUS          &trans    &trans
+            >;
+        };
+
+        // Layer 3: SYMBOLS (Shifted numpad symbols on left - Miryoku style)
         SYM {
             label = "SYM";
             bindings = <
-&kp LBRC   &kp AMPS   &kp ASTRK  &kp LPAR   &kp RBRC             &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT   &kp BSLH
-&kp COLON  &kp DLLR   &kp PRCNT  &kp CARET  &kp PLUS             &kp UNDER &kp RSHFT &kp RCTRL &kp RALT   &kp RGUI
+&kp LBRC   &kp AMPS   &kp ASTRK  &kp LPAR   &kp RBRC             &trans    &trans    &trans    &trans     &trans
+&kp COLON  &kp DLLR   &kp PRCNT  &kp CARET  &kp PLUS             &trans    &kp RSHFT &kp RCTRL &kp RALT   &kp RGUI
 &kp TILDE  &kp EXCL   &kp AT     &kp HASH   &kp PIPE             &trans    &trans    &trans    &kp RALT   &trans
-                                 &kp LPAR   &kp RPAR    &kp UNDER          &trans    &trans
+                                 &kp LPAR   &kp RPAR    &trans             &kp UNDER &trans
             >;
         };
 
-        // Layer 3: MEDIA + FUNCTION KEYS
+        // Layer 4: MEDIA + FUNCTION KEYS
         MEDIA {
             label = "MEDIA";
             bindings = <
-&kp F12    &kp F7     &kp F8     &kp F9     &kp PSCRN            &trans    &trans    &trans    &trans     &trans
+&kp F12    &kp F7     &kp F8     &kp F9     &kp PSCRN            &trans     &trans       &trans       &trans     &trans
 &kp F11    &kp F4     &kp F5     &kp F6     &kp SLCK             &kp C_PREV &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT &kp C_MUTE
-&kp F10    &kp F1     &kp F2     &kp F3     &kp PAUSE_BREAK      &trans    &trans    &trans    &trans     &trans
-                                 &trans     &kp C_PP    &trans             &mkp LCLK &mkp RCLK
+&kp F10    &kp F1     &kp F2     &kp F3     &kp PAUSE_BREAK      &trans     &trans       &trans       &trans     &trans
+                                 &trans     &kp C_PP    &trans              &mkp LCLK    &mkp RCLK
             >;
         };
 
-        // Layer 4: KEYBOARD CONTROLS
+        // Layer 5: KEYBOARD CONTROLS
         KBD {
             label = "KBD";
             bindings = <

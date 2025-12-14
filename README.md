@@ -5,8 +5,9 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 ## Features
 
 - **Colemak-DH** alpha layout
-- **Home Row Mods** (GUI, ALT, CTL, SFT on home row)
-- **5 Layers** optimized for the 5-thumb cluster
+- **Home Row Mods** (GUI, ALT, CTL, SFT on home row) with balanced flavor
+- **6 Layers** optimized for the 5-thumb cluster
+- **Numpad Layer** on left hand (Miryoku-style)
 - **Trackball Integration** for pointer movement, scrolling, and sniping
 - **Bluetooth Support** with 5 device profiles
 
@@ -23,44 +24,60 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
 │   Z   │X/RALT │   C   │   D   │   V   │   │   K   │   H   │   ,   │./RALT │   /   │
 └───────┴───────┴───────┼───────┼───────┤   ├───────┼───────┼───────┴───────┴───────┘
-                        │ESC/SFT│SPC/NAV│TAB/MED│ENT/CTL│BSP/SYM│ 🔴 Trackball
+                        │ESC/MED│SPC/NAV│TAB/SYM│ENT/NUM│BSP/NUM│ 🔴 Trackball
                         └───────┴───────┴───────┴───────┴───────┘
 ```
 
-**Home Row Mods:**
+**Home Row Mods (GACS order):**
 - Left hand: GUI → ALT → CTL → SFT
 - Right hand: SFT → CTL → ALT → GUI
+- Uses `balanced` flavor with 280ms tapping term for reliable activation
+- `require-prior-idle-ms` prevents misfires during fast typing
 
-### Layer 1: NAV + NUMBERS
+### Layer 1: NAV (Navigation + Clipboard)
 *Activated by holding Space*
 ```
 ┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
-│   1   │   2   │   3   │   4   │   5   │   │   6   │   7   │   8   │   9   │   0   │
+│ UNDO  │  CUT  │ COPY  │PASTE  │ REDO  │   │ CAPS  │ HOME  │  UP   │  END  │ PGUP  │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
-│  GUI  │  ALT  │  CTL  │  SFT  │  TAB  │   │ LEFT  │ DOWN  │  UP   │ RIGHT │   ;   │
+│  GUI  │  ALT  │  CTL  │  SFT  │  TAB  │   │  INS  │ LEFT  │ DOWN  │ RIGHT │ PGDN  │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
-│ UNDO  │  CUT  │ COPY  │PASTE  │ REDO  │   │ HOME  │ PGDN  │ PGUP  │  END  │   \   │
+│       │ RALT  │       │       │       │   │       │ HOME  │       │  END  │       │
 └───────┴───────┴───────┼───────┼───────┤   ├───────┼───────┼───────┴───────┴───────┘
-                        │   `   │ ████  │   -   │ ENTER │  DEL  │
+                        │       │ ████  │       │ ENTER │  DEL  │
                         └───────┴───────┴───────┴───────┴───────┘
 ```
 
-### Layer 2: SYMBOLS
-*Activated by holding Backspace*
+### Layer 2: NUM (Numpad - Miryoku style)
+*Activated by holding Enter or Backspace*
 ```
 ┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
-│   {   │   &   │   *   │   (   │   }   │   │   -   │   =   │   [   │   ]   │   \   │
+│   [   │   7   │   8   │   9   │   ]   │   │       │       │       │       │       │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
-│   :   │   $   │   %   │   ^   │   +   │   │   _   │  SFT  │  CTL  │  ALT  │  GUI  │
+│   ;   │   4   │   5   │   6   │   =   │   │       │  SFT  │  CTL  │  ALT  │  GUI  │
+├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
+│   `   │   1   │   2   │   3   │   \   │   │       │       │       │ RALT  │       │
+└───────┴───────┴───────┼───────┼───────┤   ├───────┼───────┼───────┴───────┴───────┘
+                        │   .   │   0   │   -   │ ████  │ ████  │
+                        └───────┴───────┴───────┴───────┴───────┘
+```
+
+### Layer 3: SYM (Symbols - Shifted Numpad)
+*Activated by holding Tab*
+```
+┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
+│   {   │   &   │   *   │   (   │   }   │   │       │       │       │       │       │
+├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
+│   :   │   $   │   %   │   ^   │   +   │   │       │  SFT  │  CTL  │  ALT  │  GUI  │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
 │   ~   │   !   │   @   │   #   │   |   │   │       │       │       │ RALT  │       │
 └───────┴───────┴───────┼───────┼───────┤   ├───────┼───────┼───────┴───────┴───────┘
-                        │   (   │   )   │   _   │       │ ████  │
+                        │   (   │   )   │ ████  │   _   │       │
                         └───────┴───────┴───────┴───────┴───────┘
 ```
 
-### Layer 3: MEDIA + FUNCTION KEYS
-*Activated by holding Tab*
+### Layer 4: MEDIA + FUNCTION KEYS
+*Activated by holding Escape*
 ```
 ┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
 │  F12  │  F7   │  F8   │  F9   │ PSCR  │   │       │       │       │       │       │
@@ -69,11 +86,11 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
 │  F10  │  F1   │  F2   │  F3   │ PAUSE │   │       │       │       │       │       │
 └───────┴───────┴───────┼───────┼───────┤   ├───────┼───────┼───────┴───────┴───────┘
-                        │       │ PLAY  │ ████  │ LCLK  │ RCLK  │
+                        │ ████  │ PLAY  │       │ LCLK  │ RCLK  │
                         └───────┴───────┴───────┴───────┴───────┘
 ```
 
-### Layer 4: KEYBOARD CONTROLS
+### Layer 5: KEYBOARD CONTROLS
 *Activated by combo: Q + P (both outer top keys)*
 ```
 ┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
@@ -93,22 +110,23 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 
 The integrated trackball replaces the need for a dedicated mouse layer:
 
-| Feature | Description | Config Value |
-|---------|-------------|--------------|
-| **Pointer Movement** | Move cursor with trackball | Default |
-| **DPI** | Pointer sensitivity | 2400 CPI |
-| **Sniping Mode** | Slow/precise movement | 800 CPI |
-| **Scroll Mode** | Hold M key to scroll | 76 tick |
-| **Auto Mouse Timeout** | Return to typing mode | 400ms |
+| Feature                | Description                | Config Value |
+| ---------------------- | -------------------------- | ------------ |
+| **Pointer Movement**   | Move cursor with trackball | Default      |
+| **DPI**                | Pointer sensitivity        | 2400 CPI     |
+| **Sniping Mode**       | Slow/precise movement      | 800 CPI      |
+| **Scroll Mode**        | Hold M key to scroll       | 76 tick      |
+| **Auto Mouse Timeout** | Return to typing mode      | 400ms        |
 
 ---
 
 ## Combos
 
-| Combo | Keys | Action |
-|-------|------|--------|
-| Keyboard Controls | Q + P | Toggle Layer 4 |
-| Caps Word | Left Shift + Right Shift | Enable Caps Word |
+| Combo             | Keys                     | Action           |
+| ----------------- | ------------------------ | ---------------- |
+| Keyboard Controls | Q + P                    | Toggle Layer 5   |
+| Caps Word         | Left Shift + Right Shift | Enable Caps Word |
+| Return to Base    | B + J                    | Go to Layer 0    |
 
 ---
 
@@ -130,6 +148,7 @@ This repository uses GitHub Actions to automatically build firmware on push.
 After the GitHub Actions build completes:
 
 ### 1. Download the Firmware
+
 - Go to the **Actions** tab on your GitHub repository
 - Click on the latest successful workflow run
 - Scroll down to **Artifacts**
@@ -139,17 +158,21 @@ After the GitHub Actions build completes:
   - `charybdis_right-nice_nano_v2-zmk.uf2`
 
 ### 2. Enter Bootloader Mode
+
 For each half of the keyboard:
 
 **Option A: Double-tap reset button**
+
 - Quickly press the reset button twice on the controller
 
 **Option B: Use bootloader key (if configured)**
+
 - Press the BOOT key on the Keyboard Controls layer (Q + P combo, then BOOT)
 
 The controller will appear as a USB drive named `NICENANO` (or similar).
 
 ### 3. Flash the Firmware
+
 1. **Left half**: Copy `charybdis_left-nice_nano_v2-zmk.uf2` to the USB drive
 2. Wait for it to disconnect and reconnect
 3. **Right half**: Copy `charybdis_right-nice_nano_v2-zmk.uf2` to the USB drive
@@ -157,13 +180,16 @@ The controller will appear as a USB drive named `NICENANO` (or similar).
 The keyboard will automatically reboot after flashing.
 
 ### 4. Pair the Halves
+
 If the halves don't connect automatically:
+
 1. Turn off both halves
 2. Turn on the **right half** first (central)
 3. Turn on the **left half** (peripheral)
 4. They should pair within a few seconds
 
 ### 5. Connect to Your Computer
+
 - The keyboard will appear as `Charybdis` in Bluetooth settings
 - Use BT0-BT4 keys on Layer 4 to switch between paired devices
 - Use BT_CLR to clear the current profile and re-pair
@@ -173,15 +199,18 @@ If the halves don't connect automatically:
 ## Troubleshooting
 
 ### Halves won't connect
+
 1. Clear both halves: Enter bootloader on each, flash fresh firmware
 2. Clear Bluetooth bonds: Use BT_CLR on both halves
 3. Re-pair following the steps above
 
 ### Bluetooth issues
+
 - Make sure you're selecting the correct BT profile (BT0-BT4)
 - Try clearing the profile with BT_CLR and re-pairing
 
 ### Trackball not working
+
 - The trackball is on the right half only
 - Ensure the right half firmware includes the PMW3610 driver
 
@@ -189,12 +218,12 @@ If the halves don't connect automatically:
 
 ## Configuration Files
 
-| File | Purpose |
-|------|---------|
-| `config/charybdis.keymap` | Key bindings and layers |
-| `config/charybdis.conf` | Global ZMK settings |
-| `config/boards/shields/charybdis/charybdis_right.conf` | Trackball/pointer settings |
-| `build.yaml` | Build matrix for GitHub Actions |
+| File                                                     | Purpose                         |
+| -------------------------------------------------------- | ------------------------------- |
+| `config/charybdis.keymap`                              | Key bindings and layers         |
+| `config/charybdis.conf`                                | Global ZMK settings             |
+| `config/boards/shields/charybdis/charybdis_right.conf` | Trackball/pointer settings      |
+| `build.yaml`                                           | Build matrix for GitHub Actions |
 
 ---
 
