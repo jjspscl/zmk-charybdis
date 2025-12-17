@@ -6,7 +6,7 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 
 - **Colemak-DH** alpha layout
 - **Home Row Mods** (GUI, ALT, CTL, SFT on home row) with balanced flavor
-- **6 Layers** optimized for the 5-thumb cluster
+- **7 Layers** optimized for the 5-thumb cluster
 - **Numpad Layer** on left hand (Miryoku-style)
 - **Trackball Integration** for pointer movement, scrolling, and sniping
 - **Bluetooth Support** with 5 device profiles
@@ -31,7 +31,7 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 **Home Row Mods (GACS order):**
 - Left hand: GUI → ALT → CTL → SFT
 - Right hand: SFT → CTL → ALT → GUI
-- Uses `balanced` flavor with 280ms tapping term for reliable activation
+- Uses `balanced` flavor with 200ms tapping term (Miryoku default)
 - `require-prior-idle-ms` prevents misfires during fast typing
 
 ### Layer 1: NAV (Navigation + Clipboard)
@@ -40,9 +40,9 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 ┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
 │ UNDO  │  CUT  │ COPY  │PASTE  │ REDO  │   │ CAPS  │ HOME  │  UP   │  END  │ PGUP  │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
-│  GUI  │  ALT  │  CTL  │  SFT  │  TAB  │   │  INS  │ LEFT  │ DOWN  │ RIGHT │ PGDN  │
+│  GUI  │  ALT  │  CTL  │  SFT  │  TAB  │   │  INS  │ LEFT  │ DOWN  │  UP   │ RIGHT │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
-│       │ RALT  │       │       │       │   │       │ HOME  │       │  END  │       │
+│       │ RALT  │       │       │       │   │       │ HOME  │       │  END  │ PGDN  │
 └───────┴───────┴───────┼───────┼───────┤   ├───────┼───────┼───────┴───────┴───────┘
                         │       │ ████  │       │ ENTER │  DEL  │
                         └───────┴───────┴───────┴───────┴───────┘
@@ -77,7 +77,8 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 ```
 
 ### Layer 4: MEDIA + FUNCTION KEYS
-*Activated by holding Escape (media left, F-keys right)*
+*Activated by holding Escape (media left, F-keys right, trackball = SCROLL)*
+*Hold ESC + A for SNIPE mode (precision trackball)*
 ```
 ┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
 │       │       │       │       │       │   │ PSCR  │  F7   │  F8   │  F9   │  F12  │
@@ -104,29 +105,44 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
                         └───────┴───────┴───────┴───────┴───────┘
 ```
 
+### Layer 6: SNIPE (Precision Mouse)
+*Activated by combo: ESC (hold) + A (trackball = SLOW/PRECISE at 800 CPI)*
+```
+┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
+│       │       │       │       │       │   │       │       │       │       │       │
+├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
+│       │       │       │       │       │   │       │       │       │       │       │
+├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
+│       │       │       │       │       │   │       │       │       │       │       │
+└───────┴───────┴───────┼───────┼───────┤   ├───────┼───────┼───────┴───────┴───────┘
+                        │       │       │       │ LCLK  │ RCLK  │
+                        └───────┴───────┴───────┴───────┴───────┘
+```
+
 ---
 
 ## Trackball Features
 
 The integrated trackball replaces the need for a dedicated mouse layer:
 
-| Feature                | Description                | Config Value |
-| ---------------------- | -------------------------- | ------------ |
-| **Pointer Movement**   | Move cursor with trackball | Default      |
-| **DPI**                | Pointer sensitivity        | 2400 CPI     |
-| **Sniping Mode**       | Slow/precise movement      | 800 CPI      |
-| **Scroll Mode**        | Hold M key to scroll       | 76 tick      |
-| **Auto Mouse Timeout** | Return to typing mode      | 400ms        |
+| Feature                | Description                           | Config Value  |
+| ---------------------- | ------------------------------------- | ------------- |
+| **Pointer Movement**   | Move cursor with trackball            | Default       |
+| **DPI**                | Pointer sensitivity                   | 2400 CPI      |
+| **Sniping Mode**       | Slow/precise (Layer 6 - hold thumb)   | 800 CPI       |
+| **Scroll Mode**        | Layer 4 (MEDIA) - hold ESC            | 76 tick       |
+| **Auto Mouse Timeout** | Return to typing mode                 | 400ms         |
 
 ---
 
 ## Combos
 
-| Combo             | Keys                     | Action           |
-| ----------------- | ------------------------ | ---------------- |
-| Keyboard Controls | Q + P                    | Toggle Layer 5   |
-| Caps Word         | Left Shift + Right Shift | Enable Caps Word |
-| Return to Base    | B + J                    | Go to Layer 0    |
+| Combo             | Keys                     | Action                    |
+| ----------------- | ------------------------ | ------------------------- |
+| Keyboard Controls | Q + P                    | Toggle Layer 5            |
+| Caps Word         | Left Shift + Right Shift | Enable Caps Word          |
+| Return to Base    | B + J                    | Go to Layer 0             |
+| Snipe Mode        | ESC (hold) + A           | Layer 6 (precision mouse) |
 
 ---
 
