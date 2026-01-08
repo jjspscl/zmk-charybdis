@@ -24,7 +24,7 @@
 &lt {
     tapping-term-ms = <U_TAPPING_TERM>;
     quick-tap-ms = <QUICK_TAP_TERM>;
-    flavor = "balanced";
+    flavor = "hold-preferred";
     require-prior-idle-ms = <150>;
 };
 
