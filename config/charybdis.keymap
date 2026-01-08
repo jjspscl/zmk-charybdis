@@ -13,7 +13,7 @@
 #define SNIPE 6
 
 #define U_TAPPING_TERM 200
-#define QUICK_TAP_TERM 0
+#define QUICK_TAP_TERM 175
 
 &mt {
     tapping-term-ms = <U_TAPPING_TERM>;
@@ -25,6 +25,7 @@
     tapping-term-ms = <U_TAPPING_TERM>;
     quick-tap-ms = <QUICK_TAP_TERM>;
     flavor = "balanced";
+    require-prior-idle-ms = <150>;
 };
 
 / {
