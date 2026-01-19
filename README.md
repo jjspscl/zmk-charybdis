@@ -6,7 +6,7 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 
 - **Colemak-DH** alpha layout
 - **Home Row Mods** (GUI, ALT, CTL, SFT on home row) with balanced flavor
-- **7 Layers** optimized for the 5-thumb cluster
+- **8 Layers** optimized for the 5-thumb cluster
 - **Numpad Layer** on left hand (Miryoku-style)
 - **Trackball Integration** for pointer movement, scrolling, and sniping
 - **Bluetooth Support** with 5 device profiles
@@ -120,6 +120,21 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
                         └───────┴───────┴───────┴───────┴───────┘
 ```
 
+### Layer 7: TBALL_OFF (Trackball Disabled)
+*Toggle from Layer 4: hold ESC, tap W (trackball input scaled to 0)*
+*Tap W again to re-enable trackball*
+```
+┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
+│       │ TB_TG │       │       │       │   │       │       │       │       │       │
+├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
+│       │       │       │       │       │   │       │       │       │       │       │
+├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
+│       │       │       │       │       │   │       │       │       │       │       │
+└───────┴───────┴───────┼───────┼───────┤   ├───────┼───────┼───────┴───────┴───────┘
+                        │       │       │       │       │       │
+                        └───────┴───────┴───────┴───────┴───────┘
+```
+
 ---
 
 ## Trackball Features
@@ -133,7 +148,7 @@ The integrated trackball replaces the need for a dedicated mouse layer:
 | **Sniping Mode**       | Slow/precise (Layer 6 - toggle)       | 800 CPI       |
 | **Scroll Mode**        | Layer 4 (MEDIA) - hold ESC            | 76 tick       |
 | **Auto Mouse Timeout** | Return to typing mode                 | 400ms         |
-| **Trackball Toggle**   | Disable/enable trackball (Layer 4 W)  | -             |
+| **Trackball Toggle**   | Disable trackball (Layer 7 - toggle)  | Scale to 0    |
 
 ---
 

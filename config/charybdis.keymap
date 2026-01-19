@@ -11,6 +11,7 @@
 #define MEDIA 4
 #define KBD 5
 #define SNIPE 6
+#define TBALL_OFF 7
 
 #define U_TAPPING_TERM 200
 #define QUICK_TAP_TERM 200
@@ -70,14 +71,6 @@
             tapping-term-ms = <200>;
             quick-tap-ms = <0>;
             flavor = "balanced";
-        };
-
-        // Toggle trackball input listener
-        input_listener_toggle: input_listener_toggle {
-            compatible = "zmk,behavior-input-listener-toggle";
-            label = "Trackball Toggle";
-            #binding-cells = <0>;
-            listener = <&trackball_listener>;
         };
     };
 
@@ -159,7 +152,7 @@
         MEDIA {
             label = "MEDIA";
             bindings = <
-&tog SNIPE &input_listener_toggle &trans  &trans     &trans               &kp PSCRN       &kp F7     &kp F8     &kp F9     &kp F12
+&tog SNIPE &tog TBALL_OFF &trans    &trans     &trans               &kp PSCRN       &kp F7     &kp F8     &kp F9     &kp F12
 &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT &trans               &kp SLCK        &kp F4     &kp F5     &kp F6     &kp F11
 &trans     &kp C_PREV   &kp C_PP     &trans     &trans               &kp PAUSE_BREAK &kp F1     &kp F2     &kp F3     &kp F10
                                      &trans     &trans      &trans                   &mkp LCLK  &mkp RCLK
@@ -186,6 +179,18 @@
 &trans     &trans     &trans     &trans     &trans               &trans       &trans       &trans       &trans       &trans
 &trans     &trans     &trans     &trans     &trans               &trans       &trans       &trans       &trans       &trans
                                  &trans     &trans      &trans                &mkp LCLK    &mkp RCLK
+            >;
+        };
+
+        // Layer 7: TBALL_OFF (Trackball disabled - scales input to 0)
+        // Toggle from MEDIA layer (hold ESC, tap W)
+        TBALL_OFF {
+            label = "TB_OFF";
+            bindings = <
+&trans     &tog TBALL_OFF &trans  &trans     &trans               &trans       &trans       &trans       &trans       &trans
+&trans     &trans     &trans     &trans     &trans               &trans       &trans       &trans       &trans       &trans
+&trans     &trans     &trans     &trans     &trans               &trans       &trans       &trans       &trans       &trans
+                                 &trans     &trans      &trans                &trans       &trans
             >;
         };
     };
