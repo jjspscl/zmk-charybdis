@@ -6,7 +6,7 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 
 - **Colemak-DH** alpha layout
 - **Home Row Mods** (GUI, ALT, CTL, SFT on home row) with balanced flavor
-- **8 Layers** optimized for the 5-thumb cluster
+- **7 Layers** optimized for the 5-thumb cluster
 - **Numpad Layer** on left hand (Miryoku-style)
 - **Trackball Integration** for pointer movement, scrolling, and sniping
 - **Bluetooth Support** with 5 device profiles
@@ -78,10 +78,10 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 
 ### Layer 4: MEDIA + FUNCTION KEYS
 *Activated by holding Escape (media left, F-keys right, trackball = SCROLL)*
-*Q = Toggle SNIPE mode, W = Toggle trackball on/off*
+*Q = Toggle SNIPE mode (precision trackball)*
 ```
 ┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
-│ SNIPE │ TB_TG │       │       │       │   │ PSCR  │  F7   │  F8   │  F9   │  F12  │
+│ SNIPE │       │       │       │       │   │ PSCR  │  F7   │  F8   │  F9   │  F12  │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
 │ MUTE  │ VOLD  │ VOLU  │ NEXT  │       │   │ SLCK  │  F4   │  F5   │  F6   │  F11  │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
@@ -120,21 +120,6 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
                         └───────┴───────┴───────┴───────┴───────┘
 ```
 
-### Layer 7: TBALL_OFF (Trackball Disabled)
-*Toggle from Layer 4: hold ESC, tap W (trackball input scaled to 0)*
-*Tap W again to re-enable trackball*
-```
-┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
-│       │ TB_TG │       │       │       │   │       │       │       │       │       │
-├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
-│       │       │       │       │       │   │       │       │       │       │       │
-├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
-│       │       │       │       │       │   │       │       │       │       │       │
-└───────┴───────┴───────┼───────┼───────┤   ├───────┼───────┼───────┴───────┴───────┘
-                        │       │       │       │       │       │
-                        └───────┴───────┴───────┴───────┴───────┘
-```
-
 ---
 
 ## Trackball Features
@@ -148,7 +133,6 @@ The integrated trackball replaces the need for a dedicated mouse layer:
 | **Sniping Mode**       | Slow/precise (Layer 6 - toggle)       | 800 CPI       |
 | **Scroll Mode**        | Layer 4 (MEDIA) - hold ESC            | 76 tick       |
 | **Auto Mouse Timeout** | Return to typing mode                 | 400ms         |
-| **Trackball Toggle**   | Disable trackball (Layer 7 - toggle)  | Scale to 0    |
 
 ---
 
@@ -160,11 +144,10 @@ The integrated trackball replaces the need for a dedicated mouse layer:
 | Caps Word         | Left Shift + Right Shift | Enable Caps Word          |
 | Return to Base    | B + J                    | Go to Layer 0             |
 
-**Layer 4 (MEDIA) Toggles:**
+**Layer 4 (MEDIA) Toggle:**
 | Key (while holding ESC) | Action                              |
 | ----------------------- | ----------------------------------- |
 | Q                       | Toggle SNIPE mode (precision mouse) |
-| W                       | Toggle trackball on/off             |
 
 ---
 

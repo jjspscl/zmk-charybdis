@@ -5,7 +5,6 @@
  */
  
 #include "charybdis.dtsi"
-#include <input/processors.dtsi>
 
 &default_transform {
 	col-offset = <5>;
@@ -66,11 +65,5 @@
   trackball_listener: trackball_listener {
     compatible = "zmk,input-listener";
     device = <&trackball>;
-
-    /* Layer 7 (TBALL_OFF) - scale trackball input to 0 to disable it */
-    tball_off_layer {
-      layers = <7>;
-      input-processors = <&zip_xy_scaler 0 1>;
-    };
   };
 };
