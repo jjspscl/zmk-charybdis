@@ -97,13 +97,6 @@
             key-positions = <4 5>;
             timeout-ms = <50>;
         };
-
-        // ESC (MEDIA thumb) + A = SNIPE layer (precision trackball)
-        combo_snipe_layer {
-            bindings = <&mo SNIPE>;
-            key-positions = <30 10>;
-            timeout-ms = <100>;
-        };
     };
 
     keymap {
@@ -155,11 +148,11 @@
 
         // Layer 4: MEDIA + FUNCTION KEYS (Fkeys on right, Media on left)
         // Trackball is in scroll mode on this layer
-        // Hold ESC + A for SNIPE (precision) mode
+        // Q = Toggle SNIPE (precision trackball)
         MEDIA {
             label = "MEDIA";
             bindings = <
-&trans     &trans       &trans       &trans     &trans               &kp PSCRN       &kp F7     &kp F8     &kp F9     &kp F12
+&tog SNIPE &trans       &trans       &trans     &trans               &kp PSCRN       &kp F7     &kp F8     &kp F9     &kp F12
 &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT &trans               &kp SLCK        &kp F4     &kp F5     &kp F6     &kp F11
 &trans     &kp C_PREV   &kp C_PP     &trans     &trans               &kp PAUSE_BREAK &kp F1     &kp F2     &kp F3     &kp F10
                                      &trans     &trans      &trans                   &mkp LCLK  &mkp RCLK
@@ -178,11 +171,11 @@
         };
 
         // Layer 6: SNIPE (Slow/precise trackball mode with mouse clicks)
-        // Activated from MEDIA layer thumbs for precision clicking
+        // Toggle from MEDIA layer (hold ESC, tap Q)
         SNIPE {
             label = "SNIPE";
             bindings = <
-&trans     &trans     &trans     &trans     &trans               &trans       &trans       &trans       &trans       &trans
+&tog SNIPE &trans     &trans     &trans     &trans               &trans       &trans       &trans       &trans       &trans
 &trans     &trans     &trans     &trans     &trans               &trans       &trans       &trans       &trans       &trans
 &trans     &trans     &trans     &trans     &trans               &trans       &trans       &trans       &trans       &trans
                                  &trans     &trans      &trans                &mkp LCLK    &mkp RCLK

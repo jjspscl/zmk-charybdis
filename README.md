@@ -78,10 +78,10 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 
 ### Layer 4: MEDIA + FUNCTION KEYS
 *Activated by holding Escape (media left, F-keys right, trackball = SCROLL)*
-*Hold ESC + A for SNIPE mode (precision trackball)*
+*Q = Toggle SNIPE mode (precision trackball)*
 ```
 ┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
-│       │       │       │       │       │   │ PSCR  │  F7   │  F8   │  F9   │  F12  │
+│ SNIPE │       │       │       │       │   │ PSCR  │  F7   │  F8   │  F9   │  F12  │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
 │ MUTE  │ VOLD  │ VOLU  │ NEXT  │       │   │ SLCK  │  F4   │  F5   │  F6   │  F11  │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
@@ -106,10 +106,11 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 ```
 
 ### Layer 6: SNIPE (Precision Mouse)
-*Activated by combo: ESC (hold) + A (trackball = SLOW/PRECISE at 800 CPI)*
+*Toggle from Layer 4: hold ESC, tap Q (trackball = SLOW/PRECISE at 800 CPI)*
+*Tap Q again to exit SNIPE mode*
 ```
 ┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
-│       │       │       │       │       │   │       │       │       │       │       │
+│ SNIPE │       │       │       │       │   │       │       │       │       │       │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
 │       │       │       │       │       │   │       │       │       │       │       │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
@@ -129,7 +130,7 @@ The integrated trackball replaces the need for a dedicated mouse layer:
 | ---------------------- | ------------------------------------- | ------------- |
 | **Pointer Movement**   | Move cursor with trackball            | Default       |
 | **DPI**                | Pointer sensitivity                   | 2400 CPI      |
-| **Sniping Mode**       | Slow/precise (Layer 6 - hold thumb)   | 800 CPI       |
+| **Sniping Mode**       | Slow/precise (Layer 6 - toggle)       | 800 CPI       |
 | **Scroll Mode**        | Layer 4 (MEDIA) - hold ESC            | 76 tick       |
 | **Auto Mouse Timeout** | Return to typing mode                 | 400ms         |
 
@@ -142,7 +143,11 @@ The integrated trackball replaces the need for a dedicated mouse layer:
 | Keyboard Controls | Q + P                    | Toggle Layer 5            |
 | Caps Word         | Left Shift + Right Shift | Enable Caps Word          |
 | Return to Base    | B + J                    | Go to Layer 0             |
-| Snipe Mode        | ESC (hold) + A           | Layer 6 (precision mouse) |
+
+**Layer 4 (MEDIA) Toggle:**
+| Key (while holding ESC) | Action                              |
+| ----------------------- | ----------------------------------- |
+| Q                       | Toggle SNIPE mode (precision mouse) |
 
 ---
 
