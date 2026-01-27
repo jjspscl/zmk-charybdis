@@ -6,6 +6,7 @@
  
 #include "charybdis.dtsi"
 #include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <dt-bindings/zmk/input_transform.h>
 #include <input/processors.dtsi>
 
 &default_transform {
@@ -74,10 +75,11 @@
 / {
     /* Custom input processor to discard input (scale to 0) */
     zip_discard: zip_discard {
-        compatible = "zmk,input-processor-transform";
-        #input-processor-cells = <0>;
-        x-scale = <0>;
-        y-scale = <0>;
+        compatible = "zmk,input-processor-scaler";
+        #input-processor-cells = <2>;
+        type = <INPUT_EV_REL>;
+        codes = <INPUT_REL_X INPUT_REL_Y>;
+        track-remainders;
     };
 
     /* 
@@ -106,7 +108,7 @@
         /* Layer 7 (NOSCROLL): Disable trackball - discard input */
         disabled_mode {
             layers = <7>;
-            input-processors = <&zip_discard>;
+            input-processors = <&zip_discard 0 1>;
         };
     };
 };
