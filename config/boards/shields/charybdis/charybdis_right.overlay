@@ -5,6 +5,7 @@
  */
  
 #include "charybdis.dtsi"
+#include <zephyr/dt-bindings/input/input-event-codes.h>
 
 &default_transform {
 	col-offset = <5>;
@@ -50,20 +51,73 @@
 
     trackball: trackball@0 {
         status = "okay";
-        compatible = "pixart,pmw3610";
+        compatible = "pixart,pmw3610-alt";
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-         /*   optional features   */
-        scroll-layers = <4>;
-        snipe-layers = <6>;
-        // automouse-layer = <2>;
+        
+        /* CPI and orientation settings (moved from Kconfig) */
+        cpi = <2400>;
+        invert-x;
+        /* swap-xy; */  /* Use if 90° rotation needed - test and adjust */
+        
+        /* Input event codes */
+        evt-type = <INPUT_EV_REL>;
+        x-input-code = <INPUT_REL_X>;
+        y-input-code = <INPUT_REL_Y>;
+        
+        /* Power management */
+        force-awake;
+        /* force-awake-4ms-mode; */  /* Enable for 250Hz polling with USB */
     };
 };
 
 / {
-  trackball_listener: trackball_listener {
-    compatible = "zmk,input-listener";
-    device = <&trackball>;
-  };
+    /* 
+     * Layer indices:
+     * 0 = BASE, 1 = NAV, 2 = NUM, 3 = SYM, 4 = MEDIA, 5 = KBD, 6 = SNIPE, 7 = NOSCROLL
+     */
+
+    /* Default: Normal mouse mode on layers 0, 1, 2, 3, 5 */
+    trackball_listener: trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+        layers = <0 1 2 3 5>;
+        /* Normal trackball movement at full CPI (2400) */
+    };
+    
+    /* Layer 4 (MEDIA): Scroll mode */
+    trackball_scroll_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+        layers = <4>;
+        /* Convert Y to scroll wheel, discard X */
+        x-input-code = <INPUT_REL_MISC>;
+        y-input-code = <INPUT_REL_WHEEL>;
+        y-invert;
+        /* Scale down for smooth scrolling (1/8 speed) */
+        scale-multiplier = <1>;
+        scale-divisor = <8>;
+    };
+    
+    /* Layer 6 (SNIPE): Precision/slow mode */
+    trackball_snipe_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+        layers = <6>;
+        /* Scale down to ~400 effective CPI (1/6 of 2400) */
+        scale-multiplier = <1>;
+        scale-divisor = <6>;
+    };
+    
+    /* Layer 7 (NOSCROLL): TRUE disable - discard all input */
+    trackball_disabled_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+        layers = <7>;
+        /* Discard both axes completely */
+        x-input-code = <INPUT_REL_MISC>;
+        y-input-code = <INPUT_REL_MISC>;
+    };
 };
+;

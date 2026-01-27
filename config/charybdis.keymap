@@ -11,6 +11,7 @@
 #define MEDIA 4
 #define KBD 5
 #define SNIPE 6
+#define NOSCROLL 7
 
 #define U_TAPPING_TERM 200
 #define QUICK_TAP_TERM 175
@@ -149,10 +150,11 @@
         // Layer 4: MEDIA + FUNCTION KEYS (Fkeys on right, Media on left)
         // Trackball is in scroll mode on this layer
         // Q = Toggle SNIPE (precision trackball)
+        // W = Toggle NOSCROLL (disable trackball movement - uses scroll mode)
         MEDIA {
             label = "MEDIA";
             bindings = <
-&tog SNIPE &trans       &trans       &trans     &trans               &kp PSCRN       &kp F7     &kp F8     &kp F9     &kp F12
+&tog SNIPE &tog NOSCROLL &trans       &trans     &trans               &kp PSCRN       &kp F7     &kp F8     &kp F9     &kp F12
 &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT &trans               &kp SLCK        &kp F4     &kp F5     &kp F6     &kp F11
 &trans     &kp C_PREV   &kp C_PP     &trans     &trans               &kp PAUSE_BREAK &kp F1     &kp F2     &kp F3     &kp F10
                                      &trans     &trans      &trans                   &mkp LCLK  &mkp RCLK
@@ -176,6 +178,19 @@
             label = "SNIPE";
             bindings = <
 &tog SNIPE &trans     &trans     &trans     &trans               &trans       &trans       &trans       &trans       &trans
+&trans     &trans     &trans     &trans     &trans               &trans       &trans       &trans       &trans       &trans
+&trans     &trans     &trans     &trans     &trans               &trans       &trans       &trans       &trans       &trans
+                                 &trans     &trans      &trans                &mkp LCLK    &mkp RCLK
+            >;
+        };
+
+        // Layer 7: NOSCROLL (Trackball disabled - converts to scroll mode)
+        // Toggle from MEDIA layer (hold ESC, tap W)
+        // Trackball movement is converted to scroll, effectively "disabling" cursor movement
+        NOSCROLL {
+            label = "NOSCRL";
+            bindings = <
+&trans     &tog NOSCROLL &trans  &trans     &trans               &trans       &trans       &trans       &trans       &trans
 &trans     &trans     &trans     &trans     &trans               &trans       &trans       &trans       &trans       &trans
 &trans     &trans     &trans     &trans     &trans               &trans       &trans       &trans       &trans       &trans
                                  &trans     &trans      &trans                &mkp LCLK    &mkp RCLK
