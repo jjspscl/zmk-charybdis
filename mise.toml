@@ -1,0 +1,98 @@
+# mise configuration for ZMK Charybdis firmware development
+# https://mise.jdx.dev/
+
+[tools]
+python = "3.11"
+cmake = "latest"
+ninja = "latest"
+
+[env]
+# Zephyr workspace directory
+ZEPHYR_BASE = "{{ config_root }}/zephyr"
+ZMK_WORKSPACE = "{{ config_root }}"
+
+[tasks.setup]
+description = "Initialize ZMK workspace and install dependencies"
+run = """
+#!/usr/bin/env bash
+set -e
+
+echo "📦 Installing Python dependencies..."
+pip install west
+
+echo "🔧 Initializing ZMK workspace..."
+if [ ! -d ".west" ]; then
+    west init -l config
+fi
+
+echo "⬇️ Updating ZMK modules..."
+west update
+
+echo "📥 Installing Zephyr Python dependencies..."
+pip install -r zephyr/scripts/requirements.txt
+
+echo "✅ Setup complete! Run 'mise run build:left' or 'mise run build:right' to build firmware."
+"""
+
+[tasks."build:left"]
+description = "Build firmware for the left half (nice_nano)"
+run = """
+#!/usr/bin/env bash
+set -e
+echo "🔨 Building Charybdis LEFT..."
+west build -s zmk/app -b nice_nano -- -DSHIELD=charybdis_left -DZMK_CONFIG="${ZMK_WORKSPACE}/config"
+echo "✅ Firmware ready: build/zephyr/zmk.uf2"
+"""
+
+[tasks."build:right"]
+description = "Build firmware for the right half (nice_nano)"
+run = """
+#!/usr/bin/env bash
+set -e
+echo "🔨 Building Charybdis RIGHT..."
+west build -s zmk/app -b nice_nano -- -DSHIELD=charybdis_right -DZMK_CONFIG="${ZMK_WORKSPACE}/config"
+echo "✅ Firmware ready: build/zephyr/zmk.uf2"
+"""
+
+[tasks."build:all"]
+description = "Build firmware for both halves"
+depends = ["build:left"]
+run = """
+#!/usr/bin/env bash
+set -e
+# Move left firmware
+mkdir -p firmware
+cp build/zephyr/zmk.uf2 firmware/charybdis_left.uf2
+echo "📁 Saved: firmware/charybdis_left.uf2"
+
+# Build right
+echo "🔨 Building Charybdis RIGHT..."
+west build -s zmk/app -b nice_nano -- -DSHIELD=charybdis_right -DZMK_CONFIG="${ZMK_WORKSPACE}/config"
+cp build/zephyr/zmk.uf2 firmware/charybdis_right.uf2
+echo "📁 Saved: firmware/charybdis_right.uf2"
+
+echo "✅ Both firmware files ready in ./firmware/"
+"""
+
+[tasks.clean]
+description = "Clean build artifacts"
+run = "rm -rf build"
+
+[tasks.flash]
+description = "Instructions for flashing firmware"
+run = '''
+#!/usr/bin/env bash
+echo "📝 Flashing Instructions:"
+echo ""
+echo "1. Put your nice!nano into bootloader mode:"
+echo "   - Double-tap the reset button"
+echo "   - Or hold reset while connecting USB"
+echo ""
+echo "2. A USB drive named 'NICENANO' should appear"
+echo ""
+echo "3. Copy the .uf2 file to the drive:"
+echo "   - LEFT:  cp firmware/charybdis_left.uf2 /media/$USER/NICENANO/"
+echo "   - RIGHT: cp firmware/charybdis_right.uf2 /media/$USER/NICENANO/"
+echo ""
+echo "4. The keyboard will automatically reboot after copying"
+'''

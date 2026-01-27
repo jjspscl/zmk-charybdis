@@ -93,10 +93,10 @@
         /* Default: invert X axis for correct orientation */
         input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>;
         
-        /* Layer 4 (MEDIA): Scroll mode */
+        /* Layer 4 (MEDIA): Scroll mode - Y inverted for natural scrolling */
         scroll_mode {
             layers = <4>;
-            input-processors = <&zip_xy_to_scroll_mapper>, <&zip_scroll_scaler 1 8>;
+            input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>, <&zip_xy_to_scroll_mapper>, <&zip_scroll_scaler 1 16>;
         };
         
         /* Layer 6 (SNIPE): Precision/slow mode - 1/6 speed */
