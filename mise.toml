@@ -31,35 +31,59 @@ west update
 echo "📥 Installing Zephyr Python dependencies..."
 pip install -r zephyr/scripts/requirements.txt
 
+echo "🔧 Installing Zephyr SDK (if not present)..."
+ZEPHYR_SDK_VERSION="0.17.0"
+ZEPHYR_SDK_INSTALL_DIR="$HOME/.local/zephyr-sdk-${ZEPHYR_SDK_VERSION}"
+
+if [ ! -d "$ZEPHYR_SDK_INSTALL_DIR" ]; then
+    echo "Downloading Zephyr SDK ${ZEPHYR_SDK_VERSION}..."
+    cd /tmp
+    wget -q "https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v${ZEPHYR_SDK_VERSION}/zephyr-sdk-${ZEPHYR_SDK_VERSION}_linux-x86_64_minimal.tar.xz"
+    tar xf "zephyr-sdk-${ZEPHYR_SDK_VERSION}_linux-x86_64_minimal.tar.xz" -C "$HOME/.local/"
+    cd "$ZEPHYR_SDK_INSTALL_DIR"
+    ./setup.sh -t arm-zephyr-eabi -h -c
+    rm -f "/tmp/zephyr-sdk-${ZEPHYR_SDK_VERSION}_linux-x86_64_minimal.tar.xz"
+    echo "Zephyr SDK installed to $ZEPHYR_SDK_INSTALL_DIR"
+else
+    echo "Zephyr SDK already installed at $ZEPHYR_SDK_INSTALL_DIR"
+fi
+
+echo "📦 Registering Zephyr CMake package..."
+cd "$OLDPWD"
+west zephyr-export
+
 echo "✅ Setup complete! Run 'mise run build:left' or 'mise run build:right' to build firmware."
 """
 
 [tasks."build:left"]
 description = "Build firmware for the left half (nice_nano)"
-run = """
+run = '''
 #!/usr/bin/env bash
 set -e
+export ZEPHYR_BASE="$PWD/zephyr"
 echo "🔨 Building Charybdis LEFT..."
-west build -s zmk/app -b nice_nano -- -DSHIELD=charybdis_left -DZMK_CONFIG="${ZMK_WORKSPACE}/config"
+west build -s zmk/app -b nice_nano -- -DSHIELD=charybdis_left -DZMK_CONFIG="$PWD/config"
 echo "✅ Firmware ready: build/zephyr/zmk.uf2"
-"""
+'''
 
 [tasks."build:right"]
 description = "Build firmware for the right half (nice_nano)"
-run = """
+run = '''
 #!/usr/bin/env bash
 set -e
+export ZEPHYR_BASE="$PWD/zephyr"
 echo "🔨 Building Charybdis RIGHT..."
-west build -s zmk/app -b nice_nano -- -DSHIELD=charybdis_right -DZMK_CONFIG="${ZMK_WORKSPACE}/config"
+west build -s zmk/app -b nice_nano -- -DSHIELD=charybdis_right -DZMK_CONFIG="$PWD/config"
 echo "✅ Firmware ready: build/zephyr/zmk.uf2"
-"""
+'''
 
 [tasks."build:all"]
 description = "Build firmware for both halves"
 depends = ["build:left"]
-run = """
+run = '''
 #!/usr/bin/env bash
 set -e
+export ZEPHYR_BASE="$PWD/zephyr"
 # Move left firmware
 mkdir -p firmware
 cp build/zephyr/zmk.uf2 firmware/charybdis_left.uf2
@@ -67,12 +91,12 @@ echo "📁 Saved: firmware/charybdis_left.uf2"
 
 # Build right
 echo "🔨 Building Charybdis RIGHT..."
-west build -s zmk/app -b nice_nano -- -DSHIELD=charybdis_right -DZMK_CONFIG="${ZMK_WORKSPACE}/config"
+west build -s zmk/app -b nice_nano -- -DSHIELD=charybdis_right -DZMK_CONFIG="$PWD/config"
 cp build/zephyr/zmk.uf2 firmware/charybdis_right.uf2
 echo "📁 Saved: firmware/charybdis_right.uf2"
 
 echo "✅ Both firmware files ready in ./firmware/"
-"""
+'''
 
 [tasks.clean]
 description = "Clean build artifacts"

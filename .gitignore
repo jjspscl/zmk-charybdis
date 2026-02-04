@@ -1,1 +1,30 @@
+# Analysis notes
 analysis.md
+
+# ZMK workspace directories (managed by west)
+.west/
+zephyr/
+zmk/
+zmk-pmw3610-driver/
+modules/
+optional/
+
+# Build artifacts
+build/
+firmware/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editor
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
