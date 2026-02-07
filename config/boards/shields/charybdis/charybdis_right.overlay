@@ -5,23 +5,20 @@
  */
  
 #include "charybdis.dtsi"
-#include <zephyr/dt-bindings/input/input-event-codes.h>
-#include <dt-bindings/zmk/input_transform.h>
-#include <input/processors.dtsi>
 
 &default_transform {
-	col-offset = <5>;
+        col-offset = <5>;
 };
 
 &kscan0 {
-	col-gpios
-		= <&pro_micro 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-		, <&pro_micro 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-		, <&pro_micro 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-		, <&pro_micro 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-		, <&pro_micro 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-		, <&pro_micro 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-		;
+        col-gpios
+                = <&pro_micro 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+                , <&pro_micro 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+                , <&pro_micro 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+                , <&pro_micro 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+                , <&pro_micro 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+                , <&pro_micro 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+                ;
 };
 
 &pinctrl {
@@ -53,107 +50,20 @@
 
     trackball: trackball@0 {
         status = "okay";
-        compatible = "pixart,pmw3610-alt";
+        compatible = "pixart,pmw3610";
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        
-        /* 
-         * CPI setting - this is the BASE sensitivity
-         * Higher CPI = faster cursor movement
-         * inorichi config used CPI=2400 with divider=4, so effective ~600
-         * Using 1600 as a balanced default
-         */
-        cpi = <1600>;
-        
-        /* 
-         * Axis orientation - matching inorichi driver settings:
-         * - CONFIG_PMW3610_ORIENTATION_90=y means swap X/Y axes
-         * - CONFIG_PMW3610_INVERT_X=y means invert X
-         * Combined: swap-xy + invert the NEW X (which was Y before swap)
-         */
-        swap-xy;
-        invert-x;
-        
-        /* Input event codes - standard mouse relative movement */
-        evt-type = <INPUT_EV_REL>;
-        x-input-code = <INPUT_REL_X>;
-        y-input-code = <INPUT_REL_Y>;
-        
-        /* Power management - keep sensor awake for responsiveness */
-        force-awake;
-        force-awake-4ms-mode;
+        /*   optional features   */
+        scroll-layers = <4>;
+        snipe-layers = <6>;
+        // automouse-layer = <2>;
     };
 };
 
 / {
-    /*
-     * Input processors for layer-based trackball behavior
-     * This replicates inorichi driver's built-in scroll/snipe/disable layers
-     */
-    input_processors {
-        /* 
-         * Scaler that reduces input to zero (effectively disables trackball)
-         * Used on NOSCROLL layer (layer 7)
-         */
-        zip_xy_zero_scaler: zip_xy_zero_scaler {
-            compatible = "zmk,input-processor-scaler";
-            #input-processor-cells = <2>;
-            type = <INPUT_EV_REL>;
-            codes = <INPUT_REL_X INPUT_REL_Y>;
-            track-remainders;
-        };
-    };
-
-    /*
-     * Trackball input listener with layer-based modes
-     * 
-     * Layer behavior (matching inorichi driver):
-     * - Default (layers 0,1,2,3,5): Normal mouse movement
-     * - Layer 4 (MEDIA): Scroll mode - trackball controls scroll wheel
-     * - Layer 6 (SNIPE): Precision mode - 1/4 speed for fine control
-     * - Layer 7 (NOSCROLL): Disabled - trackball input ignored
-     */
-    trackball_listener: trackball_listener {
-        compatible = "zmk,input-listener";
-        device = <&trackball>;
-        
-        /* 
-         * Default behavior: normal mouse mode
-         * No processing needed - raw sensor data goes to HID
-         */
-        
-        /*
-         * Layer 4 (MEDIA): Scroll Mode
-         * Converts X/Y movement to scroll wheel events
-         * Y-invert for natural scrolling (move down = scroll down)
-         * Scaled down 1:8 for smooth scrolling
-         */
-        scroll_mode {
-            layers = <4>;
-            input-processors = 
-                <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,
-                <&zip_xy_to_scroll_mapper>,
-                <&zip_scroll_scaler 1 8>;
-        };
-        
-        /*
-         * Layer 6 (SNIPE): Precision/Slow Mode  
-         * Reduces speed to 1/4 for fine cursor control
-         * Effective CPI becomes ~400 (1600 / 4)
-         */
-        snipe_mode {
-            layers = <6>;
-            input-processors = <&zip_xy_scaler 1 4>;
-        };
-        
-        /*
-         * Layer 7 (NOSCROLL): Trackball Disabled
-         * Scales all input to zero, effectively ignoring trackball
-         */
-        disabled_mode {
-            layers = <7>;
-            input-processors = <&zip_xy_zero_scaler 0 1>;
-        };
-    };
+  trackball_listener: trackball_listener {
+    compatible = "zmk,input-listener";
+    device = <&trackball>;
+  };
 };
