@@ -24,9 +24,9 @@
 
 &lt {
     tapping-term-ms = <U_TAPPING_TERM>;
-    quick-tap-ms = <0>;                   // Disable quick-tap for layer-taps to prevent accidental double-taps
-    flavor = "balanced";                  // Better for thumb hold-for-layer keys
-    require-prior-idle-ms = <150>;        // Prevent misfires during fast typing
+    quick-tap-ms = <QUICK_TAP_TERM>;       // Enable quick-tap for repeated keys (e.g., backspace)
+    flavor = "balanced";                    // Hold activates when another key is pressed
+    retro-tap;                              // If held and no other key pressed, output tap on release
 };
 
 / {

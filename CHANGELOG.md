@@ -6,6 +6,36 @@ This is a fork with custom keymap and trackball configuration for the Charybdis 
 
 ---
 
+## [0.13.2] - 2026-02-07
+
+### Summary
+Improved layer-tap behavior for reliable layer activation and repeated key support.
+
+### Technical Details
+
+#### Layer-Tap Behavior Tuning
+Adjusted `&lt` (layer-tap) settings for better thumb cluster usability:
+```c
+&lt {
+    tapping-term-ms = <200>;
+-   quick-tap-ms = <0>;
++   quick-tap-ms = <175>;     // Enable quick-tap for repeated keys (e.g., backspace)
+    flavor = "balanced";
+-   require-prior-idle-ms = <150>;
++   retro-tap;                // If held with no other key, output tap on release
+};
+```
+
+#### Behavior Improvements
+1. **Reliable layer activation**: Removed `require-prior-idle-ms` so NUM/SYM layers activate properly during fast typing sequences (e.g., holding BSPC then pressing 456)
+2. **Repeated key support**: Added `quick-tap-ms` for rapid backspace/space/enter without triggering layer hold
+3. **Retro-tap safety**: If you hold a thumb key but don't press anything else, it outputs the tap action on release
+
+### Files Changed
+- `config/charybdis.keymap` (layer-tap behavior adjustment)
+
+---
+
 ## [0.13.1] - 2026-02-07
 
 ### Summary
