@@ -6,6 +6,28 @@ This is a fork with custom keymap and trackball configuration for the Charybdis 
 
 ---
 
+## [0.13.1] - 2026-02-07
+
+### Summary
+Reduced scroll mode sensitivity to match the feel of default trackball movement.
+
+### Technical Details
+
+#### Scroll Tick Adjustment
+Increased scroll tick value for less sensitive scrolling in Layer 4 (MEDIA):
+```properties
+# charybdis_right.conf
+- CONFIG_PMW3610_SCROLL_TICK=76
++ CONFIG_PMW3610_SCROLL_TICK=150
+```
+
+The higher value requires more trackball movement per scroll event, making scrolling feel more controlled and consistent with the default pointer speed.
+
+### Files Changed
+- `config/boards/shields/charybdis/charybdis_right.conf` (scroll tick adjustment)
+
+---
+
 ## [0.13.0] - 2026-02-07
 
 ### Summary
