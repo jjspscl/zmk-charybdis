@@ -6,6 +6,75 @@ This is a fork with custom keymap and trackball configuration for the Charybdis 
 
 ---
 
+## [0.13.0] - 2026-02-07
+
+### Summary
+Reverted to inorichi PMW3610 driver for reliable trackball tracking. The badjeff driver migration in 0.12.0 caused trackball issues.
+
+### Technical Details
+
+#### Driver Reversion
+Switched back to inorichi's PMW3610 driver which has built-in scroll/snipe layer support:
+```yaml
+# west.yml
+remotes:
+  - name: zmkfirmware
+    url-base: https://github.com/petejohanson
+  - name: inorichi
+    url-base: https://github.com/inorichi
+projects:
+  - name: zmk
+    remote: zmkfirmware
+    revision: feat/pointers-move-scroll
+  - name: zmk-pmw3610-driver
+    remote: inorichi
+    revision: main
+```
+
+#### Trackball Configuration (Kconfig-based)
+Restored all inorichi driver settings:
+```properties
+CONFIG_PMW3610_CPI=2400
+CONFIG_PMW3610_CPI_DIVIDOR=4
+CONFIG_PMW3610_ORIENTATION_90=y
+CONFIG_PMW3610_SNIPE_CPI=800
+CONFIG_PMW3610_SCROLL_TICK=76
+CONFIG_PMW3610_INVERT_X=y
+CONFIG_PMW3610_SMART_ALGORITHM=y
+CONFIG_PMW3610_POLLING_RATE_125_SW=y
+```
+
+#### Simplified Overlay
+Using driver's built-in layer features instead of ZMK input processors:
+```dts
+trackball: trackball@0 {
+    compatible = "pixart,pmw3610";
+    scroll-layers = <4>;
+    snipe-layers = <6>;
+};
+```
+
+#### Board Name Fix
+```yaml
+# build.yaml
+- board: nice_nano
++ board: nice_nano_v2
+```
+
+### Files Changed
+- `.github/workflows/build.yml` (reverted to simple trigger)
+- `build.yaml` (board name fix)
+- `config/west.yml` (driver change)
+- `config/boards/shields/charybdis/charybdis_right.conf` (Kconfig settings)
+- `config/boards/shields/charybdis/charybdis_right.overlay` (simplified)
+- `config/boards/shields/charybdis/charybdis_left.conf` (emptied)
+- `config/charybdis.conf` (restored BT buffer settings)
+
+### Branch Backup
+Previous badjeff configuration saved to `badjeff` branch for reference.
+
+---
+
 ## [0.12.0] - 2026-02-04
 
 ### Summary
