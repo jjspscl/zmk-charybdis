@@ -26,7 +26,8 @@
     tapping-term-ms = <U_TAPPING_TERM>;
     quick-tap-ms = <QUICK_TAP_TERM>;       // Enable quick-tap for repeated keys (e.g., backspace)
     flavor = "balanced";                    // Hold activates when another key is pressed
-    retro-tap;                              // If held and no other key pressed, output tap on release
+                                            // retro-tap removed to allow layer activation
+                                            // without another keypress (needed for scroll)
 };
 
 / {
