@@ -6,6 +6,33 @@ This is a fork with custom keymap and trackball configuration for the Charybdis 
 
 ---
 
+## [0.14.1] - 2026-08-21
+
+### Summary
+Game Mode refinements, numpad access while gaming, and trackball debugging tooling/docs.
+
+### Technical Details
+
+#### Game Mode refinements
+- `A` is now Left Shift and `Z` is Left Ctrl on the GAME layer (were plain letters).
+- Right half letters (incl. J/L/U/Y/' and K/H/,/./) are now explicitly bound as plain keys.
+- C/D/V on the left recapture their plain Base letters; right thumb keeps plain RET.
+
+#### Game Mode + numpad
+- Added `GAME_NUM` layer (index 8) with a ZMK conditional layer: when GAME + NUM are
+  both active, `GAME_NUM` activates automatically.
+- Left half switches to the full numpad while Backspace is held; right half keeps Game
+  Mode letters; releasing Backspace returns to Game Mode keys.
+
+#### Trackball diagnostics
+- Added `charybdis_right-debug` CI artifact in `build.yaml` with the `zmk-usb-logging`
+  snippet and `CONFIG_INPUT_LOG_LEVEL_DBG=y` to expose PMW3610 init/IRQ/SPI logs.
+- New `docs/trackball-troubleshooting.md` covering triage, log interpretation, and
+  wiring/power guidance; linked from README.
+- New `docs/game-mode.md` documenting the GAME layer and GAME_NUM; linked from README.
+
+---
+
 ## [0.14.0] - 2026-08-21
 
 ### Summary

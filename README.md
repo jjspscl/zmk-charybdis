@@ -111,16 +111,20 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 *All dual-role keys become single-purpose; Space stays plain (no NAV layer)*
 ```
 ┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
-│   ·   │   ·   │   ↑   │   ·   │   ·   │   │       │       │       │       │       │
+│   ·   │   ·   │   ↑   │   ·   │   ·   │   │   J   │   L   │   U   │   Y   │   '   │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
-│   A   │   ←   │   ↓   │   →   │   ·   │   │   M   │   N   │   E   │   I   │   O   │
+│  SFT  │   ←   │   ↓   │   →   │   ·   │   │   M   │   N   │   E   │   I   │   O   │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
-│   Z   │   X   │   ·   │   ·   │   ·   │   │       │       │       │       │       │
+│  CTRL │   X   │   C   │   D   │   V   │   │   K   │   H   │   ,   │   .   │   /   │
 └───────┴───────┴───────┼───────┼───────┤   ├───────┼───────┼───────┴───────┴───────┘
-                        │ ESC/M │  ████  │  TAB  │       │       │
+                        │ ESC/M │  ████  │  TAB  │  RET  │  BSP/NUM│
                         └───────┴───────┴───────┴───────┴───────┘
 ```
-Inverted-T arrows: **F=↑, R=←, S=↓, T=→**. Home-row mods are disabled on this layer so sustained key holds never emit stray modifiers. Space outputs a plain space and never activates the NAV layer.
+Inverted-T arrows: **F=↑, R=←, S=↓, T=→**. **A = Left Shift**, **Z = Left Ctrl**.
+Home-row mods and layer-taps are disabled so sustained holds never emit stray
+modifiers. Space outputs a plain space and never activates the NAV layer. Holding the
+right-thumb Backspace activates the full numpad on the left while the right side keeps
+its Game Mode letters (see [Game Mode](docs/game-mode.md)).
 
 ---
 
@@ -233,8 +237,16 @@ If the halves don't connect automatically:
 
 ### Trackball not working
 
-- The trackball is on the right half only
-- Ensure the right half firmware includes the PMW3610 driver
+- The trackball is on the right half only.
+- Ensure the right half firmware includes the PMW3610 driver.
+- Follow the step-by-step diagnosis in [trackball-troubleshooting.md](docs/trackball-troubleshooting.md).
+
+---
+
+## Documentation
+
+- [Game Mode](docs/game-mode.md) — inverted-T arrows, single-purpose keys, Game Mode + numpad.
+- [Trackball Troubleshooting](docs/trackball-troubleshooting.md) — diagnosing PMW3610 pointer issues.
 
 ---
 
