@@ -6,6 +6,28 @@ This is a fork with custom keymap and trackball configuration for the Charybdis 
 
 ---
 
+## [0.14.0] - 2026-08-21
+
+### Summary
+Added a dedicated GAME mode layer with inverted-T arrows on the left half; removed the SNIPE (precision trackball) feature.
+
+### Technical Details
+
+#### GAME Layer (replaces SNIPE)
+- Replaced SNIPE layer 6 in-place with GAME mode; NOSCROLL stays layer 7.
+- Inverted-T arrows: `F=↑, R=←, S=↓, T=→` on the left half.
+- Toggle: hold ESC (MEDIA layer), tap Q. Tap Q again to exit.
+- All dual-role keys become single-purpose on GAME: home-row mods become plain keys, `Z/KBD` and `X/RAlt` become plain `Z` and `X`.
+- Space becomes `&kp SPACE` — plain, latency-free, never activates the NAV layer.
+- Combos (KBD toggle, Caps Word, Return to Base) now scoped to non-GAME layers to prevent accidental triggers during play.
+
+#### SNIPE Removal
+- Deleted `snipe-layers = <6>` from `charybdis_right.overlay`.
+- Deleted `CONFIG_PMW3610_SNIPE_CPI` and `CONFIG_PMW3610_SNIPE_CPI_DIVIDOR` from `charybdis_right.conf`.
+- Kept `scroll-layers = <4>` (MEDIA) unchanged.
+
+---
+
 ## [0.13.2] - 2026-02-07
 
 ### Summary

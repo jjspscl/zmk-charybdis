@@ -10,7 +10,7 @@
 #define SYM 3
 #define MEDIA 4
 #define KBD 5
-#define SNIPE 6
+#define GAME 6
 #define NOSCROLL 7
 
 #define U_TAPPING_TERM 200
@@ -84,6 +84,7 @@
             bindings = <&tog KBD>;
             key-positions = <0 9>;
             timeout-ms = <50>;
+            layers = <BASE NAV NUM SYM MEDIA NOSCROLL>;
         };
 
         // Both shifts = Caps Word
@@ -91,6 +92,7 @@
             bindings = <&caps_word>;
             key-positions = <13 16>;
             timeout-ms = <50>;
+            layers = <BASE NAV NUM SYM MEDIA NOSCROLL>;
         };
 
         // Return to base layer
@@ -98,6 +100,7 @@
             bindings = <&to BASE>;
             key-positions = <4 5>;
             timeout-ms = <50>;
+            layers = <BASE NAV NUM SYM MEDIA KBD NOSCROLL>;
         };
     };
 
@@ -150,12 +153,12 @@
 
         // Layer 4: MEDIA + FUNCTION KEYS (Fkeys on right, Media on left)
         // Trackball is in scroll mode on this layer
-        // Q = Toggle SNIPE (precision trackball)
+        // Q = Toggle GAME mode
         // W = Toggle NOSCROLL (disable trackball movement - uses scroll mode)
         MEDIA {
             label = "MEDIA";
             bindings = <
-&tog SNIPE &tog NOSCROLL &trans       &trans     &trans               &kp PSCRN       &kp F7     &kp F8     &kp F9     &kp F12
+&tog GAME &tog NOSCROLL &trans       &trans     &trans               &kp PSCRN       &kp F7     &kp F8     &kp F9     &kp F12
 &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT &trans               &kp SLCK        &kp F4     &kp F5     &kp F6     &kp F11
 &trans     &kp C_PREV   &kp C_PP     &trans     &trans               &kp PAUSE_BREAK &kp F1     &kp F2     &kp F3     &kp F10
                                      &trans     &trans      &trans                   &mkp LCLK  &mkp RCLK
@@ -173,15 +176,17 @@
             >;
         };
 
-        // Layer 6: SNIPE (Slow/precise trackball mode with mouse clicks)
+        // Layer 6: GAME (Inverted-T arrows + plain keys)
         // Toggle from MEDIA layer (hold ESC, tap Q)
-        SNIPE {
-            label = "SNIPE";
+        // All dual-role keys become single-purpose to avoid hold-tap misfires
+        // during sustained gameplay
+        GAME {
+            label = "GAME";
             bindings = <
-&tog SNIPE &trans     &trans     &trans     &trans               &trans       &trans       &trans       &trans       &trans
-&trans     &trans     &trans     &trans     &trans               &trans       &trans       &trans       &trans       &trans
-&trans     &trans     &trans     &trans     &trans               &trans       &trans       &trans       &trans       &trans
-                                 &trans     &trans      &trans                &mkp LCLK    &mkp RCLK
+&trans     &trans     &kp UP     &trans     &trans               &trans       &trans       &trans       &trans       &trans
+&kp A      &kp LEFT   &kp DOWN   &kp RIGHT  &trans               &kp M        &kp N        &kp E        &kp I        &kp O
+&kp Z      &kp X      &trans     &trans     &trans               &trans       &trans       &trans       &trans       &trans
+                                  &lt MEDIA ESC &kp SPACE &kp TAB            &trans       &trans
             >;
         };
 

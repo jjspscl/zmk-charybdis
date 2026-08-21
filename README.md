@@ -6,9 +6,10 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 
 - **Colemak-DH** alpha layout
 - **Home Row Mods** (GUI, ALT, CTL, SFT on home row) with balanced flavor
-- **7 Layers** optimized for the 5-thumb cluster
+- **8 Layers** optimized for the 5-thumb cluster
 - **Numpad Layer** on left hand (Miryoku-style)
-- **Trackball Integration** for pointer movement, scrolling, and sniping
+- **Gaming Layer** with inverted-T arrows on the left half
+- **Trackball Integration** for pointer movement and scrolling
 - **Bluetooth Support** with 5 device profiles
 
 ---
@@ -78,10 +79,10 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
 
 ### Layer 4: MEDIA + FUNCTION KEYS
 *Activated by holding Escape (media left, F-keys right, trackball = SCROLL)*
-*Q = Toggle SNIPE mode (precision trackball)*
+*Q = Toggle GAME mode*
 ```
 ┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
-│ SNIPE │       │       │       │       │   │ PSCR  │  F7   │  F8   │  F9   │  F12  │
+│ GAME  │       │       │       │       │   │ PSCR  │  F7   │  F8   │  F9   │  F12  │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
 │ MUTE  │ VOLD  │ VOLU  │ NEXT  │       │   │ SLCK  │  F4   │  F5   │  F6   │  F11  │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
@@ -105,20 +106,21 @@ A Colemak-DH based keymap for the Bastard Keyboards Charybdis with integrated tr
                         └───────┴───────┴───────┴───────┴───────┘
 ```
 
-### Layer 6: SNIPE (Precision Mouse)
-*Toggle from Layer 4: hold ESC, tap Q (trackball = SLOW/PRECISE at 800 CPI)*
-*Tap Q again to exit SNIPE mode*
+### Layer 6: GAME (Inverted-T Arrows)
+*Toggle from Layer 4: hold ESC, tap Q. Tap Q again to exit GAME mode*
+*All dual-role keys become single-purpose; Space stays plain (no NAV layer)*
 ```
 ┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
-│ SNIPE │       │       │       │       │   │       │       │       │       │       │
+│   ·   │   ·   │   ↑   │   ·   │   ·   │   │       │       │       │       │       │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
-│       │       │       │       │       │   │       │       │       │       │       │
+│   A   │   ←   │   ↓   │   →   │   ·   │   │   M   │   N   │   E   │   I   │   O   │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
-│       │       │       │       │       │   │       │       │       │       │       │
+│   Z   │   X   │   ·   │   ·   │   ·   │   │       │       │       │       │       │
 └───────┴───────┴───────┼───────┼───────┤   ├───────┼───────┼───────┴───────┴───────┘
-                        │       │       │       │ LCLK  │ RCLK  │
+                        │ ESC/M │  ████  │  TAB  │       │       │
                         └───────┴───────┴───────┴───────┴───────┘
 ```
+Inverted-T arrows: **F=↑, R=←, S=↓, T=→**. Home-row mods are disabled on this layer so sustained key holds never emit stray modifiers. Space outputs a plain space and never activates the NAV layer.
 
 ---
 
@@ -130,8 +132,7 @@ The integrated trackball replaces the need for a dedicated mouse layer:
 | ---------------------- | ------------------------------------- | ------------- |
 | **Pointer Movement**   | Move cursor with trackball            | Default       |
 | **DPI**                | Pointer sensitivity                   | 2400 CPI      |
-| **Sniping Mode**       | Slow/precise (Layer 6 - toggle)       | 800 CPI       |
-| **Scroll Mode**        | Layer 4 (MEDIA) - hold ESC            | 76 tick       |
+| **Scroll Mode**        | Layer 4 (MEDIA) - hold ESC            | 150 tick      |
 | **Auto Mouse Timeout** | Return to typing mode                 | 400ms         |
 
 ---
@@ -147,7 +148,7 @@ The integrated trackball replaces the need for a dedicated mouse layer:
 **Layer 4 (MEDIA) Toggle:**
 | Key (while holding ESC) | Action                              |
 | ----------------------- | ----------------------------------- |
-| Q                       | Toggle SNIPE mode (precision mouse) |
+| Q                       | Toggle GAME mode (inverted-T arrows) |
 
 ---
 
