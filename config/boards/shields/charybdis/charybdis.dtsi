@@ -1,4 +1,5 @@
 #include <dt-bindings/zmk/matrix_transform.h>
+#include <dt-bindings/regulator/nrf5x.h>
 
 / {
     chosen {
@@ -35,4 +36,14 @@
 			, <&pro_micro 9 GPIO_ACTIVE_HIGH>
             ;
     };
+};
+
+/* Restore DC/DC mode on the high-voltage regulator (VDDH/battery path).
+ * ZMK's stock nice_nano HWMv2 overlay only sets reg0 status="okay" and
+ * leaves it in LDO mode, which roughly doubles current draw on battery
+ * vs the old nice_nano_v2 board's CONFIG_BOARD_ENABLE_DCDC_HV=y. This
+ * was silent regression introduced by the board migration - USB is fed
+ * through a different path and was unaffected, which masked it. */
+&reg0 {
+    regulator-initial-mode = <NRF5X_REG_MODE_DCDC>;
 };
