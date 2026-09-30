@@ -115,7 +115,7 @@ layer, update that header too or scroll/move modes will bind to the wrong layer.
 ┌───────┬───────┬───────┬───────┬───────┐   ┌───────┬───────┬───────┬───────┬───────┐
 │ BOOT  │ RESET │       │       │       │   │  BT0  │  BT1  │  BT2  │  BT3  │  BT4  │
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
-│       │       │       │       │       │   │BT_CLR │CLR_ALL│       │       │       │
+│       │       │       │       │       │   │BT_CLR │CLR_ALL│  BLE  │  USB  │OUT_TOG│
 ├───────┼───────┼───────┼───────┼───────┤   ├───────┼───────┼───────┼───────┼───────┤
 │       │       │       │       │       │   │       │       │       │       │       │
 └───────┴───────┴───────┼───────┼───────┤   ├───────┼───────┼───────┴───────┴───────┘
@@ -298,6 +298,9 @@ If the halves don't connect automatically:
 
 - The keyboard appears as `Charybdis` in Bluetooth settings
 - Use BT0–BT4 on **Layer 5 (KBD)** to switch between paired devices
+- Each BT profile key selects Bluetooth output and disconnects the other four
+  host profiles without clearing their bonds. Allow the selected host to reconnect
+  before typing. These actions do not disconnect the wireless keyboard half.
 - Passkey pairing is enabled: macOS/Windows will show a numeric code —
   **type it on the Charybdis itself** and press Enter
 - `BT_CLR` clears the current profile; `BT_CLR_ALL` clears all five
@@ -316,6 +319,10 @@ If the halves don't connect automatically:
 ### Bluetooth issues
 
 - Make sure you're on the intended BT profile (BT0–BT4 on Layer 5)
+- Assign a separate profile to each computer; switch using the keyboard's profile
+  keys rather than pairing again from the operating system.
+- Profile keys now prefer BLE even when USB is connected. Use the USB output key
+  on Layer 5 when you want wired input instead.
 - Clear the profile with `BT_CLR`, or all profiles with `BT_CLR_ALL`, then re-pair
 - **Also forget the keyboard on the host.** If you clear the bond on only one
   side, the security keys no longer match and reconnection fails silently
@@ -324,6 +331,32 @@ If the halves don't connect automatically:
 - `CONFIG_BT_CTLR_PHY_2M=n` and `CONFIG_ZMK_BLE_PASSKEY_ENTRY=y` are both set as
   [ZMK-documented](https://zmk.dev/docs/troubleshooting/connection-issues)
   workarounds for hosts that refuse to pair
+- `CONFIG_BT_GATT_ENFORCE_SUBSCRIPTION=n` applies the
+  [documented Windows battery-notification workaround](https://zmk.dev/docs/config/bluetooth).
+  Host connection preferences use upstream defaults (7.5–15ms interval, peripheral
+  latency 30); actual parameters are negotiated by the host.
+- If Windows still reports connected but receives no input: forget Charybdis in
+  Windows, select its profile and press `BT_CLR`, toggle Windows Bluetooth off/on,
+  then pair again. If needed, restart Windows or remove stale Charybdis entries in
+  Device Manager with **View → Show hidden devices** enabled.
+- Update the Windows Bluetooth adapter driver. If its Power Management tab is
+  available, test with **Allow the computer to turn off this device to save power**
+  unchecked. See [Microsoft's disconnect troubleshooting](https://support.microsoft.com/en-us/windows/hardware/bluetooth/bluetooth-keeps-disconnecting-in-windows).
+
+#### Validate Bluetooth handoffs after flashing
+
+1. Build and flash normal firmware to both halves. These changes do not require
+   a full settings reset; existing bonds survive flashing.
+2. If an existing host fails to reconnect, forget Charybdis on that host and clear
+   only its keyboard profile before pairing again.
+3. Switch Mac ↔ Windows repeatedly using BT0–BT4. Check typing from both halves
+   and trackball movement on the selected host; the inactive host should disconnect,
+   though its Bluetooth UI may take time to update.
+4. Repeat after host sleep/wake and keyboard idle, including with USB power attached.
+5. For persistent failures, build the right half with the `zmk-usb-logging` snippet,
+   flash it, and capture USB logs with BLE output selected while reproducing the
+   handoff. Note whether both halves and the trackball fail or only the left half
+   stops responding.
 
 ### Keys not registering on one row or column
 
